@@ -1,11 +1,15 @@
 .mcs-stellard-send-sendForm {
-  padding: $k-spacing-widgetPadding;
+  padding: $s-spacing-widgetPadding;
 }
 .mcs-stellard-send-sendForm__sendTo {
 }
 // hmm dilemma .. these aren't direct descendants
 // since there is an inputGroup
 .mcs-stellard-send-sendForm__amount {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 .mcs-stellard-send-sendForm__currency {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }

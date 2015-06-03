@@ -5,17 +5,19 @@
         {{error}}
       </li>
     </ul>
-    <div class="k-inputGroup">
-      <input class="k-inputGroup__item mcs-stellard-send-sendForm__sendTo" ng-model="widget.destinationAddress" placeholder="Send to" type="text">
+    <div class="s-inputGroup">
+      <span class="s-inputGroup__item S-flexItem-full mcs-stellard-send-sendForm__label">Send to</span>
+      <input class="s-inputGroup__item mcs-stellard-send-sendForm__sendTo" ng-model="widget.destinationAddress" placeholder="wallet address" type="text">
     </div>
-    <div class="k-inputGroup">
-      <input class="k-inputGroup__item mcs-stellard-send-sendForm__amount K-flexItem-share" ng-model="widget.amount" placeholder="Amount" type="text">
-      <select class="k-inputGroup__item K-flexItem-none mcs-stellard-send-sendForm__currency">
+    <div class="s-inputGroup">
+      <span class="s-inputGroup__item S-flexItem-full mcs-stellard-send-sendForm__label">Amount</span>
+      <input class="s-inputGroup__item mcs-stellard-send-sendForm__amount S-flexItem-share" ng-model="widget.amount" placeholder="" type="text">
+      <select class="s-inputGroup__item S-flexItem-none mcs-stellard-send-sendForm__currency">
         <option value="STR">STR</option>
       </select>
     </div>
-    <div class="k-inputGroup">
-      <button class="k-button k-inputGroup__item--full" ng-click="widget.send()">Send</button>
+    <div class="s-inputGroup">
+      <button class="s-button s-inputGroup__item--full" ng-click="widget.send()">Send</button>
     </div>
   </form>
 </div>

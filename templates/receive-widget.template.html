@@ -7,7 +7,11 @@
     <p class="mcs-stellard-receive-receiveContainer__item mcs-stellard-receive-receiveInfo">
       <span class="mcs-stellard-receive-receiveInfo__label">Your address</span>
       <span class="mcs-stellard-receive-receiveInfo__data">{{widget.address}}</span>
-      <button ng-click="widget.friendbot()">Friendbot</button><span ng-if="widget.friendbotSent">Sent!</span>
     </p>
   </div>
+  <div class="mcs-stellard-receive-friendbot">
+    <div><a href="" ng-click="widget.friendbot()">Get test lumens</a></div>
+    <div><span ng-if="widget.friendbotSent">Lumens are on their way!</span></div>
+  </div>
+
 </div>

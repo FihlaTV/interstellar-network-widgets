@@ -1,5 +1,5 @@
 .mcs-stellard-balance-balanceEntry {
-  @include K-flex-row;
+  @include S-flex-row;
   flex-wrap: wrap;
   justify-content: center;
   margin-bottom: 1em;
@@ -7,10 +7,10 @@
 .mcs-stellard-balance-balanceEntry__amount {
   flex: 12 0 100%;
   text-align: center;
-  font-size: $k-scale-c;
+  font-size: $s-scale-c;
   line-height: 1;
 }
 .mcs-stellard-balance-balanceEntry__currency {
-  font-size: $k-scale-down1;
-  color: $k-color-F;
+  font-size: $s-scale-down1;
+  color: $s-color-F;
 }
