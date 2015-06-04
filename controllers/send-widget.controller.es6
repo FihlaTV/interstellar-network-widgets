@@ -4,23 +4,26 @@ import {Inject, Intent} from 'interstellar-core';
 import {Account, Currency, Keypair, Operation, TransactionBuilder} from 'js-stellar-lib';
 import moduleDatastore from "../util/module-datastore.es6";
 
-@Inject("interstellar-sessions.Sessions", "interstellar-network.Server")
+@Inject("$scope", "interstellar-sessions.Sessions", "interstellar-network.Server")
 class SendWidgetController {
-  constructor(Sessions, Server) {
+  constructor($scope, Sessions, Server) {
     if (!Sessions.hasDefault()) {
       console.error('No session');
       return;
     }
 
+    this.$scope = $scope;
     this.Server = Server;
     this.Sessions = Sessions;
     this.session = Sessions.default;
     this.destinationAddress = moduleDatastore.get('destinationAddress');
+    this.transactionSent = false;
     this.errors = [];
   }
 
   send() {
     this.errors = [];
+    this.transactionSent = false;
 
     if (!Account.isValidAddress(this.destinationAddress)) {
       this.errors.push('Destination address is not valid.');
@@ -55,11 +58,13 @@ class SendWidgetController {
 
     this.Server.submitTransaction(transaction)
       .then(transactionResult => {
-        alert('Transaction sent!');
+        this.transactionSent = true;
       })
       .catch(function (err) {
+        this.errors.push('Network error.');
         console.error(err);
-      });
+      })
+      .finally(() => this.$scope.$apply());
   }
 }
 

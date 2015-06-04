@@ -5,6 +5,9 @@
         {{error}}
       </li>
     </ul>
+    <div ng-if="widget.transactionSent">
+      Transaction sent!
+    </div>
     <div class="s-inputGroup">
       <span class="s-inputGroup__item S-flexItem-full mcs-stellard-send-sendForm__label">Send to</span>
       <input class="s-inputGroup__item mcs-stellard-send-sendForm__sendTo" ng-model="widget.destinationAddress" placeholder="wallet address" type="text">
