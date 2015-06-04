@@ -3,9 +3,7 @@
 
 `interstellar-network-widgets` is part of the [Interstellar Module System](https://github.com/stellar/interstellar).
 
-It is a collection of widgets that use services provided by [`interstellar-network`](https://github.com/stellar/interstellar-network) to communicate with the Stellar network. Right now it has controllers, templates and styles for:
-- balances
-- send & receive
+It is a collection of front-end widgets which use services provided by [`interstellar-network`](https://github.com/stellar/interstellar-network) to communicate with the Stellar network. 
 
 > Quick start to developing in the Interstellar eco-system:
 >
