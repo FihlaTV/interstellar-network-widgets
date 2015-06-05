@@ -1,16 +1,16 @@
-.mcs-stellard-balance-balanceEntry {
+.ims-network-balance-balanceEntry {
   @include S-flex-row;
   flex-wrap: wrap;
   justify-content: center;
   margin-bottom: 1em;
 }
-.mcs-stellard-balance-balanceEntry__amount {
+.ims-network-balance-balanceEntry__amount {
   flex: 12 0 100%;
   text-align: center;
   font-size: $s-scale-c;
   line-height: 1;
 }
-.mcs-stellard-balance-balanceEntry__currency {
+.ims-network-balance-balanceEntry__currency {
   font-size: $s-scale-down1;
   color: $s-color-F;
 }

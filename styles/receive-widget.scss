@@ -1,25 +1,25 @@
 
-.mcs-stellard-receive-receiveContainer {
+.ims-network-receive-receiveContainer {
   @include S-flex-row;
 }
-  .mcs-stellard-receive-receiveContainer__item {
+  .ims-network-receive-receiveContainer__item {
     flex: 12;
   }
 
-.mcs-stellard-receive-receiveInfo {
+.ims-network-receive-receiveInfo {
   padding: $s-spacing-widgetPadding;
   margin-bottom: 0;
   text-overflow: ellipsis;
   overflow: hidden;
 }
-  .mcs-stellard-receive-receiveInfo__label {
+  .ims-network-receive-receiveInfo__label {
     display: block;
     font-size: $s-scale-down1;
     line-height: 1;
   }
-  .mcs-stellard-receive-receiveInfo__info {
+  .ims-network-receive-receiveInfo__info {
     border-bottom: 1px dotted $s-color-F;
   }
-.mcs-stellard-receive-friendbot {
+.ims-network-receive-friendbot {
   padding: $s-spacing-widgetPadding;
 }

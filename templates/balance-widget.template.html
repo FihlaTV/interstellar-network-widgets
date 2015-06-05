@@ -1,9 +1,9 @@
 <div ng-controller="interstellar-network-widgets.BalanceWidgetController as widget">
   <ul>
-    <li class="mcs-stellard-balance-balanceEntry" ng-repeat="balance in widget.balances">
-      <span class="mcs-stellard-balance-balanceEntry__amount">{{balance.balance}}</span>
-      <span class="mcs-stellard-balance-balanceEntry__currency">
-        <span class="mcs-stellard-balance-balanceEntry__currency__code">
+    <li class="ims-network-balance-balanceEntry" ng-repeat="balance in widget.balances">
+      <span class="ims-network-balance-balanceEntry__amount">{{balance.balance}}</span>
+      <span class="ims-network-balance-balanceEntry__currency">
+        <span class="ims-network-balance-balanceEntry__currency__code">
           <span>{{balance.currency_code}}</span>
           <!--(<span class="mcs-stellard-balance-balanceEntry__currency__issuer">stellar network</span>)-->
         </span>

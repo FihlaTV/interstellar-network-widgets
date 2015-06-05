@@ -1,5 +1,5 @@
 <div ng-controller="interstellar-network-widgets.SendWidgetController as widget">
-  <form class="mcs-stellard-send-sendForm">
+  <form class="ims-network-send-sendForm">
     <ul ng-if="widget.errors">
       <li ng-repeat="error in widget.errors">
         {{error}}
@@ -9,13 +9,13 @@
       Transaction sent!
     </div>
     <div class="s-inputGroup">
-      <span class="s-inputGroup__item S-flexItem-full mcs-stellard-send-sendForm__label">Send to</span>
-      <input class="s-inputGroup__item mcs-stellard-send-sendForm__sendTo" ng-model="widget.destinationAddress" placeholder="wallet address" type="text">
+      <span class="s-inputGroup__item S-flexItem-full ims-network-send-sendForm__label">Send to</span>
+      <input class="s-inputGroup__item ims-network-send-sendForm__sendTo" ng-model="widget.destinationAddress" placeholder="wallet address" type="text">
     </div>
     <div class="s-inputGroup">
-      <span class="s-inputGroup__item S-flexItem-full mcs-stellard-send-sendForm__label">Amount</span>
-      <input class="s-inputGroup__item mcs-stellard-send-sendForm__amount S-flexItem-share" ng-model="widget.amount" placeholder="" type="text">
-      <select class="s-inputGroup__item S-flexItem-none mcs-stellard-send-sendForm__currency">
+      <span class="s-inputGroup__item S-flexItem-full ims-network-send-sendForm__label">Amount</span>
+      <input class="s-inputGroup__item ims-network-send-sendForm__amount S-flexItem-share" ng-model="widget.amount" placeholder="" type="text">
+      <select class="s-inputGroup__item S-flexItem-none ims-network-send-sendForm__currency">
         <option value="STR">STR</option>
       </select>
     </div>
