@@ -60,9 +60,9 @@ class SendWidgetController {
       .then(transactionResult => {
         this.transactionSent = true;
       })
-      .catch(function (err) {
+      .catch(e => {
         this.errors.push('Network error.');
-        console.error(err);
+        console.error(e);
       })
       .finally(() => this.$scope.$apply());
   }
