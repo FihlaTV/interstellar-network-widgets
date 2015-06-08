@@ -30,7 +30,6 @@ None
 * [`<interstellar-network-send>`](#interstellar-network-send-widget)
 * [`<interstellar-network-receive>`](#interstellar-network-receive-widget)
 * [`<interstellar-network-balance>`](#interstellar-network-balance-widget)
-* [`<interstellar-network-history>`](#interstellar-network-history-widget)
 
 #### `<interstellar-network-pre-send>` widget
 
@@ -56,8 +55,3 @@ TODO - screenshot
 
 This widget displays list of balances.
 
-#### `<interstellar-network-history>` widget
-
-TODO - screenshot
-
-This widget displays list of transactions.
