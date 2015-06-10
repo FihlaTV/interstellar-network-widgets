@@ -4,9 +4,9 @@ import {Inject, Intent} from 'interstellar-core';
 import {Account, Currency, Keypair, Operation, TransactionBuilder} from 'js-stellar-lib';
 import moduleDatastore from "../util/module-datastore.es6";
 
-@Inject("$scope", "interstellar-sessions.Sessions", "interstellar-network.Server")
+@Inject("$scope", "interstellar-sessions.Sessions", "interstellar-network.Server", "interstellar-stellar-api.StellarApi")
 class SendWidgetController {
-  constructor($scope, Sessions, Server) {
+  constructor($scope, Sessions, Server, StellarApi) {
     if (!Sessions.hasDefault()) {
       console.error('No session');
       return;
@@ -15,20 +15,46 @@ class SendWidgetController {
     this.$scope = $scope;
     this.Server = Server;
     this.Sessions = Sessions;
+    this.StellarApi = StellarApi;
     this.session = Sessions.default;
-    this.destinationAddress = moduleDatastore.get('destinationAddress');
+    this.destination = moduleDatastore.get('destinationAddress');
     this.transactionSent = false;
     this.errors = [];
+
+    $scope.$watch('widget.destination', (newValue, oldValue) => {
+      this.onChangeDestination.call(this, newValue, oldValue);
+    });
+  }
+
+  onChangeDestination() {
+    if (!this.destination) {
+      this.destinationAddress = null;
+      this.errors = [];
+      return;
+    }
+
+    this.errors = [];
+    this.destinationAddress = null;
+    if (Account.isValidAddress(this.destination)) {
+      this.destinationAddress = this.destination;
+    } else {
+      this.StellarApi.federation(this.destination, 'stellar.org')
+        .success(data => {
+          this.destinationAddress = data.federation_json.destination_new_address;
+        })
+        .error((data, status) => {
+          if (status === 404) {
+            this.errors.push('Can\'t find this user in federation database.');
+          } else {
+            this.errors.push('Federation server error.');
+          }
+        });
+    }
   }
 
   send() {
     this.errors = [];
     this.transactionSent = false;
-
-    if (!Account.isValidAddress(this.destinationAddress)) {
-      this.errors.push('Destination address is not valid.');
-      return;
-    }
 
     if (!this.session.getAccount()) {
       this.Sessions.loadDefaultAccount()
@@ -45,6 +71,11 @@ class SendWidgetController {
   }
 
   _send() {
+    if (!(this.destinationAddress && Account.isValidAddress(this.destinationAddress))) {
+      this.errors.push('Destination address is not valid.');
+      return;
+    }
+
     let currency = Currency.native();
     let amount = this.amount * 1000000;
     let transaction = new TransactionBuilder(this.session.getAccount())

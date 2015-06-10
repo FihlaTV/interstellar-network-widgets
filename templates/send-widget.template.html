@@ -10,7 +10,10 @@
     </div>
     <div class="s-inputGroup">
       <span class="s-inputGroup__item S-flexItem-full ims-network-send-sendForm__label">Send to</span>
-      <input class="s-inputGroup__item ims-network-send-sendForm__sendTo" ng-model="widget.destinationAddress" placeholder="wallet address" type="text">
+      <input class="s-inputGroup__item ims-network-send-sendForm__sendTo" ng-model="widget.destination" ng-model-options="{debounce: 1000}" placeholder="wallet address" type="text">
+    </div>
+    <div class="s-inputGroup" ng-if="widget.destinationAddress">
+      Transfer will be sent to: {{widget.destinationAddress}}
     </div>
     <div class="s-inputGroup">
       <span class="s-inputGroup__item S-flexItem-full ims-network-send-sendForm__label">Amount</span>
