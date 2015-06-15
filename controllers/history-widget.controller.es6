@@ -1,10 +1,11 @@
 import {Account, Server} from 'js-stellar-lib';
-import {Inject} from 'interstellar-core';
+import {Widget, Inject} from 'interstellar-core';
 import {find} from 'lodash';
 require('../styles/history-widget.scss');
 
+@Widget('history', 'HistoryWidgetController', 'interstellar-network-widgets/history-widget')
 @Inject("$scope", "interstellar-sessions.Sessions", "interstellar-network.AccountObservable")
-export class HistoryWidgetController {
+export default class HistoryWidgetController {
   constructor($scope, Sessions, AccountObservable) {
     if (!Sessions.hasDefault()) {
       console.error('No session. This widget should be used with active session.');
@@ -31,7 +32,3 @@ export class HistoryWidgetController {
     this.$scope.$apply();
   }
 }
-
-module.exports = function(mod) {
-  mod.controller("HistoryWidgetController", HistoryWidgetController);
-};

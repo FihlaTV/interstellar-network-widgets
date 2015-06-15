@@ -1,11 +1,12 @@
 require('../styles/send-widget.scss');
 
-import {Inject, Intent} from 'interstellar-core';
+import {Widget, Inject, Intent} from 'interstellar-core';
 import {Account, Currency, Keypair, Operation, TransactionBuilder} from 'js-stellar-lib';
 import moduleDatastore from "../util/module-datastore.es6";
 
+@Widget('send', 'SendWidgetController', 'interstellar-network-widgets/send-widget')
 @Inject("$scope", "interstellar-sessions.Sessions", "interstellar-network.Server", "interstellar-stellar-api.StellarApi")
-class SendWidgetController {
+export default class SendWidgetController {
   constructor($scope, Sessions, Server, StellarApi) {
     if (!Sessions.hasDefault()) {
       console.error('No session');
@@ -98,7 +99,3 @@ class SendWidgetController {
       .finally(() => this.$scope.$apply());
   }
 }
-
-module.exports = function(mod) {
-  mod.controller("SendWidgetController", SendWidgetController);
-};

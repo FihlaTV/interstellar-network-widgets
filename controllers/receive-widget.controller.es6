@@ -1,8 +1,9 @@
 require('../styles/receive-widget.scss');
-import {Inject} from 'interstellar-core';
+import {Widget, Inject} from 'interstellar-core';
 
+@Widget('receive', 'ReceiveWidgetController', 'interstellar-network-widgets/receive-widget')
 @Inject("$scope", "interstellar-sessions.Sessions", "interstellar-network.Server")
-class ReceiveWidgetController {
+export default class ReceiveWidgetController {
   constructor($scope, Sessions, Server) {
     if (!Sessions.hasDefault()) {
       console.error('Active session is required by this widget.');
@@ -24,7 +25,3 @@ class ReceiveWidgetController {
       })
   }
 }
-
-module.exports = function(mod) {
-  mod.controller("ReceiveWidgetController", ReceiveWidgetController);
-};

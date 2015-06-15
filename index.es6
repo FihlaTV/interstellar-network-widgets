@@ -11,7 +11,6 @@ mod.use(interstellarSessions);
 mod.use(interstellarNetwork);
 
 mod.controllers = require.context("./controllers", true);
-mod.directives  = require.context("./directives", true);
 mod.templates   = require.context("raw!./templates", true);
 
 let registerBroadcastReceivers = (IntentBroadcast) => {
