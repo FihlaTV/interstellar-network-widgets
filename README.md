@@ -55,3 +55,9 @@ TODO - screenshot
 
 This widget displays list of balances.
 
+#### `<interstellar-network-trustlines>` widget
+
+TODO - screenshot
+
+This widget displays a form to add a trustline.
+

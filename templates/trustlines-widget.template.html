@@ -1,0 +1,15 @@
+<div ng-controller="interstellar-network-widgets.TrustlinesWidgetController as widget">
+  <ul ng-if="widget.errors">
+    <li ng-repeat="error in widget.errors">
+      {{error}}
+    </li>
+  </ul>
+  Issuer:
+  <input type="text" ng-model="widget.issuer" />
+  Currency:
+  <input type="text" ng-model="widget.currency" />
+  <button ng-click="widget.createTrustline()">Create Trust Line</button>
+  <pre>
+    {{widget.result}}
+  </pre>
+</div>
