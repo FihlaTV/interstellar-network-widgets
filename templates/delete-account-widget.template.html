@@ -1,0 +1,8 @@
+<div ng-controller="interstellar-network-widgets.DeleteAccountWidgetController as widget">
+  <div ng-if="widget.error">
+    {{widget.error}}
+  </div>
+  Transfer remaining balances to:<br />
+  <input type="text" placeholder="Destination Account" ng-model="widget.destination" /><br />
+  <button ng-click="widget.deleteAccount()">Delete Account</button>
+</div>
