@@ -21,6 +21,7 @@
     "lodash": "^2.4.1",
     "interstellar-core": "^0.0.1",
     "interstellar-sessions": "^0.0.1",
-    "interstellar-network": "^0.0.1"
+    "interstellar-network": "^0.0.1",
+    "interstellar-ui-messages": "^0.0.1"
   }
 }

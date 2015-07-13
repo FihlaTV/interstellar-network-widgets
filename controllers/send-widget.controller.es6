@@ -2,12 +2,17 @@ require('../styles/send-widget.scss');
 
 import {Widget, Inject, Intent} from 'interstellar-core';
 import {Account, Currency, Keypair, Operation, TransactionBuilder} from 'js-stellar-lib';
+import {Alert, AlertGroup, Toast} from 'interstellar-ui-messages';
 import moduleDatastore from "../util/module-datastore.es6";
 
 @Widget('send', 'SendWidgetController', 'interstellar-network-widgets/send-widget')
-@Inject("$scope", "interstellar-sessions.Sessions", "interstellar-network.Server", "interstellar-stellar-api.StellarApi")
+@Inject(
+  "$scope", "interstellar-sessions.Sessions", "interstellar-network.Server",
+  "interstellar-stellar-api.StellarApi", "interstellar-ui-messages.Alerts",
+  "interstellar-ui-messages.Toasts"
+)
 export default class SendWidgetController {
-  constructor($scope, Sessions, Server, StellarApi) {
+  constructor($scope, Sessions, Server, StellarApi, Alerts, Toasts) {
     if (!Sessions.hasDefault()) {
       console.error('No session');
       return;
@@ -17,10 +22,12 @@ export default class SendWidgetController {
     this.Server = Server;
     this.Sessions = Sessions;
     this.StellarApi = StellarApi;
+    this.Toasts = Toasts;
     this.session = Sessions.default;
     this.destination = moduleDatastore.get('destinationAddress');
-    this.transactionSent = false;
-    this.errors = [];
+
+    this.alerts = new AlertGroup();
+    Alerts.registerGroup(this.alerts);
 
     $scope.$watch('widget.destination', (newValue, oldValue) => {
       this.onChangeDestination.call(this, newValue, oldValue);
@@ -28,13 +35,13 @@ export default class SendWidgetController {
   }
 
   onChangeDestination() {
+    this.alerts.clear();
+
     if (!this.destination) {
       this.destinationAddress = null;
-      this.errors = [];
       return;
     }
 
-    this.errors = [];
     this.destinationAddress = null;
     if (Account.isValidAddress(this.destination)) {
       this.destinationAddress = this.destination;
@@ -45,23 +52,22 @@ export default class SendWidgetController {
         })
         .error((data, status) => {
           if (status === 404) {
-            this.errors.push('Can\'t find this user in federation database.');
+            this._showError('Can\'t find this user in federation database.');
           } else {
-            this.errors.push('Federation server error.');
+            this._showError('Federation server error.');
           }
         });
     }
   }
 
   send() {
-    this.errors = [];
-    this.transactionSent = false;
+    this.alerts.clear();
 
     if (!this.session.getAccount()) {
       this.Sessions.loadDefaultAccount()
         .then(() => {
           if (!this.session.getAccount()) {
-            this.errors.push('Your account is not funded.');
+            this._showError('Your account is not funded.');
             return;
           }
           this._send();
@@ -73,7 +79,7 @@ export default class SendWidgetController {
 
   _send() {
     if (!(this.destinationAddress && Account.isValidAddress(this.destinationAddress))) {
-      this.errors.push('Destination address is not valid.');
+      this._showError('Destination address is not valid.');
       return;
     }
 
@@ -90,12 +96,19 @@ export default class SendWidgetController {
 
     this.Server.submitTransaction(transaction)
       .then(transactionResult => {
-        this.transactionSent = true;
+        let toast = new Toast('Transaction sent!');
+        this.Toasts.show(toast);
       })
-      .catch(e => {
-        this.errors.push('Network error.');
-        console.error(e);
-      })
+      .catch(e => this._showError('Network error.'))
       .finally(() => this.$scope.$apply());
+  }
+
+  _showError(text) {
+    let alert = new Alert({
+      title: 'Error',
+      text: text,
+      type: Alert.TYPES.ERROR
+    });
+    this.alerts.show(alert);
   }
 }
