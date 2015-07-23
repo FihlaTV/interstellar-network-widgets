@@ -13,7 +13,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "http://github.com/stellar/interstellar-network.git"
+    "url": "http://github.com/stellar/interstellar-network-widgets.git"
   },
   "dependencies": {
     "angular-cookies": "^1.3.15",
