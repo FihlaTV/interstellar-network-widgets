@@ -61,3 +61,10 @@ TODO - screenshot
 
 This widget displays a form to add a trustline.
 
+## Publishing to npm
+```
+npm version [<newversion> | major | minor | patch | premajor | preminor | prepatch | prerelease]
+npm publish
+```
+npm >=2.13.0 required.
+Read more about [npm version](https://docs.npmjs.com/cli/version).

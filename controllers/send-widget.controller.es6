@@ -1,7 +1,7 @@
 require('../styles/send-widget.scss');
 
 import {Widget, Inject, Intent} from 'interstellar-core';
-import {Account, Currency, Keypair, Operation, TransactionBuilder} from 'js-stellar-lib';
+import {Account, Asset, Keypair, Operation, TransactionBuilder} from 'js-stellar-lib';
 import {Alert, AlertGroup, Toast} from 'interstellar-ui-messages';
 import moduleDatastore from "../util/module-datastore.es6";
 
@@ -83,12 +83,12 @@ export default class SendWidgetController {
       return;
     }
 
-    let currency = Currency.native();
+    let asset = Asset.native();
     let amount = this.amount * 1000000;
     let transaction = new TransactionBuilder(this.session.getAccount())
       .addOperation(Operation.payment({
         destination: this.destinationAddress,
-        currency: currency,
+        asset: asset,
         amount: amount
       }))
       .addSigner(Keypair.fromSeed(this.session.getSecret()))
