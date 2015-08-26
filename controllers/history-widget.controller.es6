@@ -1,6 +1,6 @@
 import {Account, Server} from 'js-stellar-lib';
 import {Widget, Inject} from 'interstellar-core';
-import {find} from 'lodash';
+import {find, map} from 'lodash';
 require('../styles/history-widget.scss');
 
 @Widget('history', 'HistoryWidgetController', 'interstellar-network-widgets/history-widget')
@@ -14,21 +14,43 @@ export default class HistoryWidgetController {
 
     this.$scope = $scope;
     let session = Sessions.default;
-    let address = session.getAddress();
+    this.address = session.getAddress();
 
-    AccountObservable.getTransactions(address)
-      .then(transactions => {
-        this.transactions = transactions.records;
+    AccountObservable.getPayments(this.address)
+      .then(payments => {
+        this.payments = map(payments.records, payment => this._transformPaymentFields(payment));
         $scope.$apply();
-        AccountObservable.registerTransactionListener(address, transaction => this.onTransaction.call(this, transaction));
+        AccountObservable.registerPaymentListener(this.address, payment => this.onPayment.call(this, payment));
       });
   }
 
-  onTransaction(transaction) {
-    if (find(this.transactions, t => t.id === transaction.id)) {
+  onPayment(payment) {
+    if (find(this.payments, p => p.id === payment.id)) {
       return;
     }
-    this.transactions.unshift(transaction);
+    payment = this._transformPaymentFields(payment);
+    this.payments.unshift(payment);
     this.$scope.$apply();
+  }
+
+  _transformPaymentFields(payment) {
+    if (payment.type_s === 'create_account') {
+      payment.from   = payment.funder;
+      payment.to     = payment.account;
+      payment.amount = payment.starting_balance;
+    }
+
+    payment.direction = (payment.from === this.address) ? 'out' : 'in';
+    payment.display_address = (payment.from === this.address) ? payment.to : payment.from;
+
+    if (payment.asset_code) {
+      payment.display_amount = `${payment.amount} ${payment.asset_code}`;
+    } else {
+      let amount = payment.amount / 1000000;
+      payment.display_amount = `${amount} XLM`;
+      payment.asset_issuer = 'stellar network';
+    }
+
+    return payment;
   }
 }
