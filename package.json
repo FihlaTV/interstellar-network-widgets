@@ -1,6 +1,6 @@
 {
   "name": "interstellar-network-widgets",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "The interstellar-network-widgets module provides network connected widgets.",
   "keywords": [
     "stellar",
