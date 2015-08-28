@@ -1,6 +1,6 @@
 require('../styles/delete-account-widget.scss');
 import {Widget, Intent, Inject} from 'interstellar-core';
-import {Account, Operation, Keypair, TransactionBuilder} from 'js-stellar-lib';
+import {Account, Operation, Keypair, TransactionBuilder} from 'stellar-sdk';
 
 @Widget('deleteAccount', 'DeleteAccountWidgetController', 'interstellar-network-widgets/delete-account-widget')
 @Inject("$scope", "interstellar-sessions.Sessions", "interstellar-core.IntentBroadcast", "interstellar-network.Server")

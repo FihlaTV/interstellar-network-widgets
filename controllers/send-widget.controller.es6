@@ -1,7 +1,7 @@
 require('../styles/send-widget.scss');
 
 import {Widget, Inject, Intent} from 'interstellar-core';
-import {Account, Asset, Keypair, Operation, TransactionBuilder} from 'js-stellar-lib';
+import {Account, Asset, Keypair, Operation, TransactionBuilder} from 'stellar-sdk';
 import {Alert, AlertGroup, Toast} from 'interstellar-ui-messages';
 import moduleDatastore from "../util/module-datastore.es6";
 

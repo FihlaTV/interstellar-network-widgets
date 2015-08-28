@@ -1,6 +1,6 @@
 require('../styles/trustlines-widget.scss');
 import {Widget, Inject} from 'interstellar-core';
-import {Account, Currency, Keypair, Operation, TransactionBuilder} from 'js-stellar-lib';
+import {Account, Currency, Keypair, Operation, TransactionBuilder} from 'stellar-sdk';
 
 @Widget('trustlines', 'TrustlinesWidgetController', 'interstellar-network-widgets/trustlines-widget')
 @Inject("$scope", "interstellar-sessions.Sessions", "interstellar-network.Server")

@@ -1,4 +1,4 @@
-import {Account, Server} from 'js-stellar-lib';
+import {Account, Server} from 'stellar-sdk';
 import {Widget, Inject} from 'interstellar-core';
 import {find, map} from 'lodash';
 require('../styles/history-widget.scss');
