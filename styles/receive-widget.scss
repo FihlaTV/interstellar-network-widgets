@@ -7,7 +7,7 @@
   }
 
 .ims-network-receive-receiveInfo {
-  padding: $s-spacing-widgetPadding;
+  padding: 12px;
   margin-bottom: 0;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -18,8 +18,8 @@
     line-height: 1;
   }
   .ims-network-receive-receiveInfo__info {
-    border-bottom: 1px dotted $s-color-F;
+    border-bottom: 1px dotted $s-color-light1;
   }
 .ims-network-receive-friendbot {
-  padding: $s-spacing-widgetPadding;
+  padding: 12px;
 }
