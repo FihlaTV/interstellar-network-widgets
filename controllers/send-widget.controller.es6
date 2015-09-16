@@ -84,7 +84,7 @@ export default class SendWidgetController {
     }
 
     let asset = Asset.native();
-    let amount = this.amount * 1000000;
+    let amount = this.amount * 10000000;
     let transaction = new TransactionBuilder(this.session.getAccount())
       .addOperation(Operation.payment({
         destination: this.destinationAddress,
