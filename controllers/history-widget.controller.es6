@@ -46,8 +46,7 @@ export default class HistoryWidgetController {
     if (payment.asset_code) {
       payment.display_amount = `${payment.amount} ${payment.asset_code}`;
     } else {
-      let amount = payment.amount / 1000000;
-      payment.display_amount = `${amount} XLM`;
+      payment.display_amount = `${payment.amount} XLM`;
       payment.asset_issuer = 'stellar network';
     }
 

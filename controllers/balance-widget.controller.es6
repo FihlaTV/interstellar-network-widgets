@@ -25,7 +25,6 @@ export default class BalanceWidgetController {
   onBalanceChange(balances) {
     if (isArray(balances) && balances.length > 0) {
       this.balances = sortBy(balances, balance => balance.currency_type !== 'native');
-      this.balances[0].balance = Math.floor(this.balances[0].balance/1000000);
       this.balances[0].currency_code = 'XLM';
     } else {
       this.balances = [{balance: 0, currency_code: 'XLM'}];
