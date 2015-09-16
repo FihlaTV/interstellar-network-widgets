@@ -1,6 +1,7 @@
 import {Module, Intent} from "interstellar-core";
 import interstellarSessions from "interstellar-sessions";
 import interstellarNetwork from "interstellar-network";
+import interstellarStellarApi from "interstellar-stellar-api";
 import interstellarUiMessages from "interstellar-ui-messages";
 import moduleDatastore from "./util/module-datastore.es6";
 
@@ -10,6 +11,7 @@ export default mod;
 mod.use(require('angular-cookies'));
 mod.use(interstellarSessions);
 mod.use(interstellarNetwork);
+mod.use(interstellarStellarApi);
 mod.use(interstellarUiMessages);
 
 mod.controllers = require.context("./controllers", true);
