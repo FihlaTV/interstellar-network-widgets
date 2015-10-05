@@ -83,19 +83,40 @@ export default class SendWidgetController {
       return;
     }
 
-    let asset = Asset.native();
-    let amount = this.amount * 10000000;
+    return this.Server.accounts()
+      .address(this.destinationAddress)
+      .call()
+      .then(() => {
+        // Account exist. Send payment operation.
+        let operation = Operation.payment({
+            destination: this.destinationAddress,
+            asset: Asset.native(),
+            amount: this.amount
+          });
+        return this._submitTransaction(operation);
+      })
+      .catch(err => {
+        if (err.name === 'NotFoundError') {
+          // Account exist does not exist. Send create_account operation.
+          let operation = Operation.createAccount({
+            destination: this.destinationAddress,
+            startingBalance: this.amount
+          });
+          return this._submitTransaction(operation);
+        } else {
+          throw err;
+        }
+      });
+  }
+
+  _submitTransaction(operation) {
     let transaction = new TransactionBuilder(this.session.getAccount())
-      .addOperation(Operation.payment({
-        destination: this.destinationAddress,
-        asset: asset,
-        amount: amount
-      }))
+      .addOperation(operation)
       .addSigner(Keypair.fromSeed(this.session.getSecret()))
       .build();
 
-    this.Server.submitTransaction(transaction)
-      .then(transactionResult => {
+    return this.Server.submitTransaction(transaction)
+      .then(() => {
         let toast = new Toast('Transaction sent!');
         this.Toasts.show(toast);
       })
